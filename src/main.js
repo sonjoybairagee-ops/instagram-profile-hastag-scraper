@@ -73,7 +73,7 @@ const crawler = new PlaywrightCrawler({
         },
     },
     browserPoolOptions: { useFingerprints: true },
-    maxConcurrency: 3,
+    maxConcurrency: 1,
     requestHandlerTimeoutSecs: 120,
     maxRequestRetries: 2,
 
