@@ -1,0 +1,59 @@
+{
+  "title": "Google Maps Business Scraper Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "searchQueries": {
+      "title": "Search Queries",
+      "type": "array",
+      "description": "Search terms to find businesses (e.g. 'restaurants in New York', 'plumbers London')",
+      "editor": "stringList",
+      "prefill": ["restaurants in New York", "coffee shops in London"]
+    },
+    "directUrls": {
+      "title": "Direct Google Maps URLs",
+      "type": "array",
+      "description": "Direct Google Maps business URLs to scrape",
+      "editor": "stringList",
+      "prefill": []
+    },
+    "maxResultsPerQuery": {
+      "title": "Max Results Per Query",
+      "type": "integer",
+      "description": "Maximum number of businesses to scrape per search query",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 200
+    },
+    "scrapeReviews": {
+      "title": "Scrape Reviews",
+      "type": "boolean",
+      "description": "Extract customer reviews for each business",
+      "default": true
+    },
+    "maxReviewsPerBusiness": {
+      "title": "Max Reviews Per Business",
+      "type": "integer",
+      "description": "Maximum number of reviews to extract per business",
+      "default": 10,
+      "minimum": 1,
+      "maximum": 100
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "description": "Language for Google Maps results",
+      "editor": "select",
+      "enum": ["en", "bn", "de", "fr", "es", "it", "ar", "hi", "zh"],
+      "default": "en"
+    },
+    "proxyConfiguration": {
+      "title": "Proxy Configuration",
+      "type": "object",
+      "description": "Proxy settings",
+      "editor": "proxy",
+      "prefill": { "useApifyProxy": true }
+    }
+  },
+  "required": []
+}
