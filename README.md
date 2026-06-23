@@ -1,78 +1,71 @@
-# Google Maps Business Scraper
+# YouTube Channel & Video Scraper
 
-Extract business data from Google Maps — no API key required. Search by keyword or scrape direct URLs.
+Scrape YouTube videos, channels, and search results — **no API key required**. Extracts data directly from YouTube's internal data structure.
 
-## What it extracts
+## Features
 
-- **Basic info** — name, category, description, price level
-- **Contact** — phone number, website, address, city, country
-- **Location** — coordinates (lat/lng), plus code, Google Maps URL
-- **Rating** — star rating, total review count, open/closed status
-- **Hours** — opening hours for each day of the week
-- **Photos** — business photos
-- **Reviews** — reviewer name, rating, date, text, owner replies
-- **Services** — service options, amenities, highlights
-- **Social** — Facebook, Instagram, Twitter, LinkedIn links
+- **Search results** — find videos by keyword
+- **Channel scraping** — all videos, subscribers, description, banner
+- **Video details** — views, likes, duration, tags, chapters, related videos
+- **Comments** — top comments with author, likes, date
+- **No API limits** — works without YouTube Data API
 
-## Input examples
+## Input
 
-**Search by keyword:**
+| Field | Type | Description |
+|-------|------|-------------|
+| `searchQueries` | array | YouTube search keywords |
+| `channelUrls` | array | YouTube channel URLs |
+| `videoUrls` | array | Direct video URLs |
+| `maxVideosPerChannel` | number | Max videos per channel (default: 30) |
+| `maxResultsPerSearch` | number | Max results per search (default: 20) |
+| `scrapeComments` | boolean | Extract comments (default: false) |
+| `maxCommentsPerVideo` | number | Max comments per video (default: 20) |
+| `scrapeChannel` | boolean | Extract channel info (default: true) |
+
+## Output — Video
+
 ```json
 {
-  "searchQueries": ["pizza restaurants in Chicago", "dentists in London"],
-  "maxResultsPerQuery": 50,
-  "scrapeReviews": true,
-  "maxReviewsPerBusiness": 10
+  "type": "video",
+  "videoId": "dQw4w9WgXcQ",
+  "title": "Rick Astley - Never Gonna Give You Up",
+  "channelName": "Rick Astley",
+  "views": 1400000000,
+  "likes": "1.5M",
+  "duration": "3:33",
+  "durationSeconds": 213,
+  "publishedAt": "2009-10-25",
+  "tags": ["rick astley", "never gonna give you up"],
+  "chapters": [],
+  "thumbnail": "https://i.ytimg.com/vi/...",
+  "description": "...",
+  "relatedVideos": [{ "title": "...", "views": "..." }],
+  "comments": [{ "author": "...", "text": "...", "likes": "2.3K" }],
+  "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 }
 ```
 
-**Direct URLs:**
-```json
-{
-  "directUrls": [
-    "https://www.google.com/maps/place/Eiffel+Tower/@48.8583701,2.2922926"
-  ]
-}
-```
-
-## Output sample
+## Output — Channel
 
 ```json
 {
-  "name": "Joe's Pizza",
-  "category": "Pizza restaurant",
-  "rating": 4.6,
-  "reviewCount": 2341,
-  "address": "7 Carmine St, New York, NY 10014",
-  "city": "New York",
-  "country": "USA",
-  "phone": "+1 212-366-1182",
-  "website": "joespizzanyc.com",
-  "hours": {
-    "Monday": "10:00 AM – 4:00 AM",
-    "Tuesday": "10:00 AM – 4:00 AM"
-  },
-  "openStatus": "Open now",
-  "coordinates": { "lat": 40.7305, "lng": -74.0021 },
-  "photos": ["https://..."],
-  "priceLevel": "$$",
-  "reviews": [
-    {
-      "author": "John D.",
-      "rating": 5,
-      "date": "2 months ago",
-      "text": "Best pizza in NYC!"
-    }
-  ],
-  "serviceOptions": ["Dine-in", "Takeout", "Delivery"],
-  "scrapedAt": "2026-06-23T..."
+  "type": "channel",
+  "channelId": "UCuAXFkgsw1L7xaCfnd5JJOw",
+  "name": "Rick Astley",
+  "handle": "@RickAstley",
+  "subscriberCount": "3.8M subscribers",
+  "videoCount": "82 videos",
+  "description": "...",
+  "avatar": "https://...",
+  "banner": "https://..."
 }
 ```
 
 ## Use cases
 
-- Lead generation for local businesses
-- Competitor research
-- Market analysis
-- Restaurant/hotel discovery
-- Real estate neighborhood research
+- Content research & competitor analysis
+- Influencer marketing — find channels by niche
+- Trend tracking by keyword
+- Video performance benchmarking
+- Comment sentiment analysis
